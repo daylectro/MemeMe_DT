@@ -75,21 +75,15 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <action selector="bottomTextAction:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Ltc-pC-vpm"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qaU-mt-dW4">
-                                <rect key="frame" x="10" y="138" width="355" height="60"/>
+                                <rect key="frame" x="100" y="138" width="175" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="mbY-hN-kzB"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <action selector="topTextAction:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="n3V-Vj-I2V"/>
-                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -108,8 +102,8 @@
                             <constraint firstItem="fBF-Y4-eFs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cxT-O0-k8c"/>
                             <constraint firstItem="gDo-lt-EjQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hwc-nP-Sw1"/>
                             <constraint firstItem="gDo-lt-EjQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ipV-GS-iGv"/>
-                            <constraint firstItem="qaU-mt-dW4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="pQX-Ic-VwE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qaU-mt-dW4" secondAttribute="trailing" constant="10" id="tqQ-YD-2VY"/>
+                            <constraint firstItem="qaU-mt-dW4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="pQX-Ic-VwE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qaU-mt-dW4" secondAttribute="trailing" constant="100" id="tqQ-YD-2VY"/>
                             <constraint firstItem="c4P-IT-LpN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wJd-Sd-7jo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

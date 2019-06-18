@@ -9,11 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+UINavigationControllerDelegate, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        topText.delegate = self
+        bottomText.delegate = self
         topText.text = "TOP"
         topText.textAlignment = .center
         topText.layer.zPosition = 1
@@ -22,20 +24,42 @@ UINavigationControllerDelegate {
         bottomText.textAlignment = .center
         topText.defaultTextAttributes = memeTextAttributes
         bottomText.defaultTextAttributes = memeTextAttributes
-      
+
 
     }
 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+        if textField == topText {
+            if textField.text == "TOP"{
+        topText.text = ""
+            }
+        } else {
+            if bottomText.text == "BOTTOM" {
+            bottomText.text = ""
+            }
+        }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        if textField == topText {
+        self.topText.delegate = self
+        topText.resignFirstResponder()
+
+        } else {
+        self.bottomText.delegate = self
+        bottomText.resignFirstResponder()
+        }
+
+        return false
+    }
 
     @IBOutlet weak var topText: UITextField!
 
-    @IBAction func topTextAction(_ sender: Any) {
-    }
 
     @IBOutlet weak var bottomText: UITextField!
 
-    @IBAction func bottomTextAction(_ sender: Any) {
-    }
 
     @IBAction func shareAction(_ sender: Any) {
     }
@@ -95,7 +119,11 @@ UINavigationControllerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+
+
         subscribeToKeyboardNotifications()
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,8 +144,14 @@ UINavigationControllerDelegate {
 
     @objc func keyboardWillShow(_ notification:Notification) {
 
+        if bottomText.hasText == false {
         view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+
     }
+
+
+
 
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
 
@@ -125,6 +159,8 @@ UINavigationControllerDelegate {
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
+
+
 
 }
 
