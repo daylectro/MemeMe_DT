@@ -24,6 +24,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         bottomText.textAlignment = .center
         topText.defaultTextAttributes = memeTextAttributes
         bottomText.defaultTextAttributes = memeTextAttributes
+        share.isEnabled = false
 
 
     }
@@ -62,6 +63,26 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
 
     @IBAction func shareAction(_ sender: Any) {
+        var imageShare: [Any] = []
+        imageShare.append(generateMemedImage())
+
+        let activityViewController = UIActivityViewController(activityItems: imageShare, applicationActivities: nil)
+
+        present(activityViewController, animated: true, completion: nil)
+
+
+        activityViewController.completionWithItemsHandler = {
+            (activity, success, items, error) in
+            if(success && error == nil){
+
+                self.save()
+                self.dismiss(animated: true, completion: nil);
+            }
+            else if (error != nil){
+               print("error")
+            }
+        };
+
     }
     @IBAction func cancelAction(_ sender: Any) {
     }
@@ -78,6 +99,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
+
+        share.isEnabled = true
 
     }
 
@@ -119,9 +142,6 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-
-
         subscribeToKeyboardNotifications()
 
     }
@@ -135,6 +155,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     func subscribeToKeyboardNotifications() {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
 
     func unsubscribeFromKeyboardNotifications() {
@@ -150,6 +173,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
     }
 
+    @objc func keyboardWillHide(_ notification:Notification) {
+            view.frame.origin.y = 0
+    }
 
 
 
@@ -160,7 +186,42 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         return keyboardSize.cgRectValue.height
     }
 
+    func generateMemedImage() -> UIImage {
 
+        // TODO: Hide toolbar and navbar
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.setToolbarHidden(true, animated: false)
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        // TODO: Show toolbar and navbar
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.setToolbarHidden(false, animated: false)
+
+        return memedImage
+    }
+
+    func save() {
+        // Create the meme
+        let creatememe = meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+
+        print(creatememe)
+    }
+
+
+    struct meme {
+
+            var topText: String
+            var bottomText: String
+            var originalImage: UIImage
+            var memedImage: UIImage
+
+    }
 
 }
+
 
