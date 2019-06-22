@@ -17,27 +17,31 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         topText.delegate = self
         bottomText.delegate = self
         topText.text = "TOP"
-        topText.textAlignment = .center
+
         topText.layer.zPosition = 1
+
         bottomText.layer.zPosition = 1
         bottomText.text = "BOTTOM"
-        bottomText.textAlignment = .center
+
         topText.defaultTextAttributes = memeTextAttributes
         bottomText.defaultTextAttributes = memeTextAttributes
         share.isEnabled = false
 
-
     }
+
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
         if textField == topText {
             if textField.text == "TOP"{
         topText.text = ""
+
             }
         } else {
             if bottomText.text == "BOTTOM" {
             bottomText.text = ""
+
+
             }
         }
     }
@@ -48,9 +52,11 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         self.topText.delegate = self
         topText.resignFirstResponder()
 
+
         } else {
         self.bottomText.delegate = self
         bottomText.resignFirstResponder()
+
         }
 
         return false
@@ -143,6 +149,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
+
+        topText.textAlignment = .center
+        bottomText.textAlignment = .center
 
     }
 
