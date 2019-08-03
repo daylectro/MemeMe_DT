@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4051585622F0B36F00984DE2 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051585522F0B36F00984DE2 /* CollectionViewController.swift */; };
+		4051585822F0B39B00984DE2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051585722F0B39B00984DE2 /* TableViewController.swift */; };
+		4051585A22F46B2600984DE2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051585922F46B2600984DE2 /* File.swift */; };
+		4051585C22F6053000984DE2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051585B22F6053000984DE2 /* CollectionViewCell.swift */; };
 		406F1E3822B81959007E2B6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 406F1E3622B81959007E2B6D /* Main.storyboard */; };
 		40AE386822B00D80009FAADF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE386722B00D80009FAADF /* AppDelegate.swift */; };
 		40AE386A22B00D80009FAADF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE386922B00D80009FAADF /* ViewController.swift */; };
@@ -34,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4051585522F0B36F00984DE2 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		4051585722F0B39B00984DE2 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		4051585922F46B2600984DE2 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		4051585B22F6053000984DE2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		406F1E3722B81959007E2B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40AE386422B00D80009FAADF /* MemeMe_DT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe_DT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40AE386722B00D80009FAADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +85,7 @@
 		40AE385B22B00D80009FAADF = {
 			isa = PBXGroup;
 			children = (
+				4051585922F46B2600984DE2 /* File.swift */,
 				40AE386622B00D80009FAADF /* MemeMe_DT */,
 				40AE387B22B00D82009FAADF /* MemeMe_DTTests */,
 				40AE388622B00D82009FAADF /* MemeMe_DTUITests */,
@@ -103,6 +112,9 @@
 				40AE386E22B00D82009FAADF /* Assets.xcassets */,
 				40AE387022B00D82009FAADF /* LaunchScreen.storyboard */,
 				40AE387322B00D82009FAADF /* Info.plist */,
+				4051585522F0B36F00984DE2 /* CollectionViewController.swift */,
+				4051585722F0B39B00984DE2 /* TableViewController.swift */,
+				4051585B22F6053000984DE2 /* CollectionViewCell.swift */,
 			);
 			path = MemeMe_DT;
 			sourceTree = "<group>";
@@ -256,8 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4051585A22F46B2600984DE2 /* File.swift in Sources */,
+				4051585622F0B36F00984DE2 /* CollectionViewController.swift in Sources */,
+				4051585C22F6053000984DE2 /* CollectionViewCell.swift in Sources */,
 				40AE386A22B00D80009FAADF /* ViewController.swift in Sources */,
 				40AE386822B00D80009FAADF /* AppDelegate.swift in Sources */,
+				4051585822F0B39B00984DE2 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

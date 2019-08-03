@@ -14,19 +14,19 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topText.delegate = self
-        bottomText.delegate = self
-        topText.text = "TOP"
+        configureTextField(topText, text: "TOP")
+        configureTextField(bottomText, text: "Bottom")
 
-        topText.layer.zPosition = 1
-
-        bottomText.layer.zPosition = 1
-        bottomText.text = "BOTTOM"
-
-        topText.defaultTextAttributes = memeTextAttributes
-        bottomText.defaultTextAttributes = memeTextAttributes
+        kamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         share.isEnabled = false
+    }
 
+    //reusable method
+    func configureTextField(_ textField: UITextField, text: String) {
+        textField.text = text
+        textField.delegate = self
+        textField.layer.zPosition = 1
+        textField.defaultTextAttributes = memeTextAttributes
     }
 
 
@@ -48,18 +48,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
-        if textField == topText {
-        self.topText.delegate = self
-        topText.resignFirstResponder()
+        textField.delegate = self
 
-
-        } else {
-        self.bottomText.delegate = self
-        bottomText.resignFirstResponder()
-
-        }
-
-        return false
+        return textField.resignFirstResponder()
     }
 
     @IBOutlet weak var topText: UITextField!
@@ -94,20 +85,21 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     }
     @IBAction func kameraAction(_ sender: Any) {
 
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+        pickAnImage(source: .camera)
+
     }
     @IBAction func albumAction(_ sender: Any) {
 
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+         pickAnImage(source: .photoLibrary)
+    }
+
+    func pickAnImage(source: UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.sourceType = source
+        present(pickerController, animated: true, completion: nil)
 
         share.isEnabled = true
-
     }
 
     @IBOutlet weak var imagePickerView: UIImageView!
@@ -129,13 +121,11 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
     }
 
-    /* func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        <#code#>
-    }*/
 
-    override func viewDidAppear(_ animated: Bool) {
-        kamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        kamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+//    }
+
 
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -177,13 +167,13 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     @objc func keyboardWillShow(_ notification:Notification) {
 
         if bottomText.hasText == false {
-        view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
 
     }
 
     @objc func keyboardWillHide(_ notification:Notification) {
-            view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
 
 
@@ -199,7 +189,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
         // TODO: Hide toolbar and navbar
         self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.setToolbarHidden(true, animated: false)
+
+        // funktioniert nicht
+        self.navigationController?.isToolbarHidden = true
 
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -209,6 +201,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
         // TODO: Show toolbar and navbar
         self.navigationController?.isNavigationBarHidden = false
+
+        //funktioniert nicht
         self.navigationController?.setToolbarHidden(false, animated: false)
 
         return memedImage
@@ -216,21 +210,34 @@ UINavigationControllerDelegate, UITextFieldDelegate {
 
     func save() {
         // Create the meme
-        let creatememe = meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        let creatememe = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
 
-        print(creatememe)
+
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+
+        appDelegate.memes.append(creatememe)
+
+        print(appDelegate.memes)
     }
 
 
-    struct meme {
-
-            var topText: String
-            var bottomText: String
-            var originalImage: UIImage
-            var memedImage: UIImage
-
-    }
+//    struct Meme {
+//
+//        var topText: String
+//        var bottomText: String
+//        var originalImage: UIImage
+//        var memedImage: UIImage
+//
+//    }
 
 }
 
+struct Meme {
 
+    var topText: String
+    var bottomText: String
+    var originalImage: UIImage
+    var memedImage: UIImage
+
+}
